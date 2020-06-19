@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        
+        var empty = {};
+        var point = {x:0, y:0};
+        var point2 = {x: point.x, y:point.y + 1}
+        var book = {
+            "main title" : "Javascript", // 공백도 가능
+            "for" : "all audiences"
+        }
+
+
+        console.log("empty : ", empty);
+        console.log("point : ", point);
+        console.log("point2 : ", point2);
+     
+
+        var o = {};
+        var o2 = new Object(); 
+        // o 와 o2는 같다.
+
+        var a = new Array();
+        var d = new Date();
+        var r = new RegExp("js") // 패턴매칭을 위한 RegExp 객체
+
+        var o1 = Object.create({x:1, y:2});
+        console.log(o1);
+        var o2 = Object.create(null);
+        console.log(o2);
+        var o3 = Object.create(Object.prototype);
+        console.log(o3);
+
+        function inherit(p) {
+            if (p == null) throw TypeError();
+            if (Object.create) // ECMAScript 5 이상에 정의되어 있음
+                return Object.create(p);
+
+            // Object.create 가 정의되어있지 않으면
+            var t = typeof p;
+
+            if (t !== "object" && t !== "function") {
+                throw TypeError();
+            }
+
+            function f() {};
+
+            f.prototype = p;
+            return new f();
+        }
+    </script>
+</head>
+<body>
+    
+</body>
