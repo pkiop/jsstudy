@@ -3,16 +3,19 @@
     <script>
         
         function Person() {}
+        console.log("person : ", Person);
+        var before = new Person();
         Person.prototype.eyes = 2;
         Person.prototype.nose = 1;
         var kim  = new Person();
         var park = new Person();
+        // function Person() {};
         console.log(Person.prototype);
-        console.log(kim.eyes); // => 2
-        console.log(park.eyes); // => 2
-        Person.prototype.eyes = 5;
-        console.log(kim.eyes); // => 5
-        console.log(park.eyes); // => 5
+
+        // Person Prototype object
+        console.log(kim.constructor)
+        console.log(kim.__proto__)
+        Person.prototype.newvalue = 444;
 
     </script>
 </head>
