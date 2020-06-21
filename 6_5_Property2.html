@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<head>
+    <script>
+        function inherit(p) {
+            if (p == null) throw TypeError();
+            if (Object.create) // ECMAScript 5 이상에 정의되어 있음
+                return Object.create(p);
+        }
+
+        var o = {x:1, y:2, z:3};
+        for(p in o) {
+            console.log(p, o[p]);
+        }
+
+        for(p in o) {
+            if(!o.hasOwnProperty(p))
+                continue;
+        }
+
+        for(p in o) {
+            if(typeof o[p] === "function")
+                continue;
+        }
+
+        var oo = {
+            // Data Property
+            data_prop: 7,
+            get accessor_prop() { /* 함수 몸체 */},
+            set accessor_prop(value) { /* 함수 몸체 */ }
+        }
+
+        var p = {
+            x: 1.0,
+            y: 1.0,
+            get r() {
+                return Math.sqrt(this.x*this.x + this.y*this.y);
+            },
+            set r(newValue) {
+                console.log("in setter : ", newValue);
+                var oldValue = Math.sqrt(this.x*this.x + this.y*this.y);
+                var ratio = newValue / oldValue;
+                this.x *= ratio;
+                this.y *= ratio;
+                console.log("now x : ", this.x);
+                console.log("now y : ", this.y);
+            },
+
+            get theta() {
+                return Math.atan2(this.y, this.x);
+            }
+        }
+
+        var q = inherit(p);
+        q.x = 1; q.y = 1;
+        console.log(q.r);
+        console.log(q.theta);
+        q.r = 777
+        console.log(q.r);
+        console.log(q.theta);
+
+        var serialnum = {
+            $n: 0, // 프로퍼티 이름의 $는 private 프로퍼티라는 힌트
+
+            get next() {return this.$n++;},
+            set next(n) {
+                if(n>=this.$n) this.$n++;
+                else throw "serial number can only be set to a larger value";
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
