@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<head>
+    <script>
+
+        var book = {
+            "main title" : "Javascript", // 공백도 가능
+            "for" : "all audiences"
+        }
+
+        // 공백 값 가져오기
+        // book.main title -> error
+        console.log(book["main title"]);
+
+        var temp = {}
+        console.log(temp);
+
+        temp.newProperty = "a";
+        temp["new Property"] = "b";
+
+        console.log(temp);
+
+        function addName(nameList, name, studentNumber) {
+            nameList["name"] = studentNumber
+        }
+
+        function inherit(p) {
+            if (p == null) throw TypeError();
+            if (Object.create) // ECMAScript 5 이상에 정의되어 있음
+                return Object.create(p);
+        }
+
+        var o = {};
+        o.x = 1;
+        var p = inherit(o); // 객체 o와 Object.prototype를 상속받는 객체
+        p.y = 2;
+        var q = inherit(p); // 객체 p와 o, Object.prototype을 상속받는 객체.
+        q.z = 3;
+        var s = q.toString(); // q 는 Object.prototype을 상속받았기 때문에 toString 사용가능
+
+        var result = q.x + q.y; // 값은 3 
+        console.log(result);
+
+        var temp2 = o.a;
+        console.log(temp2)
+        //var length = o.a.length;
+
+        var len = temp2 && temp2.a && temp2.length
+
+
+        delete book.author;
+        delete book["main title"];
+
+        o = {x:1}
+        delete o.x; // 삭제 성공 return true
+        delete o.x; // 존재하지 않아 return true
+        delete o.toString; // 고유프로퍼티가 아니라 아무일도 안일어나고 true
+        delete 1; // 말도 안 되지만 return true
+
+        delete Object.prototype;
+        var x = 1;
+        delete this.x;
+        function f() {}
+        delete this.f;
+        
+        var oo = {x : 1};
+        console.log("x" in oo);
+        console.log("y" in oo);
+        console.log("toString" in oo);
+        
+        console.log(oo.hasOwnProperty("x"));
+        console.log(oo.hasOwnProperty("y"));
+        console.log(oo.hasOwnProperty("toString"));
+
+        var ooo = inherit({y : 2});
+        ooo.x = 1;
+        console.log(ooo.propertyIsEnumerable("x")); // 고유 프로퍼티 열거 가능 -> true
+        console.log(ooo.propertyIsEnumerable("y")); // 상속받은 프로퍼티 -> false
+        console.log(ooo.propertyIsEnumerable("toString")); // 내장프로퍼티, 열거불가능 -> false
+    
+
+    </script>
+</head>
+<body>
+    
+</body>
