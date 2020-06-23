@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<head>
+    <script>
+        function getPropertyNames(o, /*optional*/ a) {
+            if(a == undefined) a = [];
+            //or a = a || []
+            // || -> 첫번째가 true나 true로 반환되는 값이면 그 값 return, 그렇지 않으면 뒤에 것 return
+            for(var property in o) {
+                a.push(property);
+            }
+            return a;
+        }
+
+        function f(x, y, z) {
+            if(arguments.length != 3) {
+                throw new Error("인자개수가 3이 아닙니다.")
+            }
+        }
+
+        function g(x) {
+            console.log(x);
+            arguments[0] = null;
+            console.log(x);
+        }
+
+        function square(x) {return x * x};
+
+        var s = square;
+        square(4);
+        s(4);
+
+        var o = {square: function(x) {return x * x}};
+        var y = o.square(16);
+
+        var a = [function(x) {return x*x; }, 20];
+        a[0](a[1]);
+
+        uniqueInteger.counter = 0;
+        function uniqueInteger() {
+            return uniqueInteger.counter++;
+        }
+
+        function factorial(n) {
+            if(isFinite(n) && n>0 && n == Math.round(n)) {
+                if(!(n in factorial)) {
+                    factorial[n] = n * factorial(n - 1);
+                }
+                return factorial[n];
+            }
+            else return NaN;
+        }
+        factorial[1] = 1;
+
+        function mymodule() {
+            // 모듈의 지역변수로 사용해서 전역을 어지럽히지 않음
+        }
+        mymodule(); // 함수 실행 필수
+
+        // 하나의 프로퍼티 선언도 과하다면
+        (function() {
+            // 모듈 코드가 위치
+        }()) // 바로 호출하고 끝냄.
+    </script>
+</head>
+<body>
+    
+</body>
