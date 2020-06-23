@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<head>
+    <script>
+        function printprops(o) {
+            for(var p in o) {
+                console.log(p + " : " + o[p] + "\n");
+            }
+        }
+        var arr = [1,2,3,4,5];
+        printprops(arr);
+
+        var ten = (function(x) {return 10});
+        console.log(ten);
+        console.log(ten(100));
+
+        function hypotenuse(a, b) {
+            function square(x) {return x * x};
+            return Math.sqrt(square(a). square(b));
+        }
+
+        var calculator = {
+            operand1: 1,
+            operand2: 1,
+            add: function() {
+                this.result = this.operand1 + this.operand2;
+            }
+        }
+        calculator.add();
+        console.log(calculator.result);
+        calculator["add"]();
+        console.log(calculator.result);
+
+        var o = {
+            m: function() {
+                var self = this;
+                console.log(this === o); // true
+                f();
+                function f() {
+                    console.log(this === o); // false
+                    console.log(self === o);
+                }
+            }
+        }
+        o["m"]();
+
+        var o = new Object();
+        var o = new Object;
+    </script>
+</head>
+<body>
+    
+</body>
